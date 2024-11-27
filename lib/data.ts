@@ -19,7 +19,7 @@ const fuse = new Fuse(allSymbols, {
     threshold: 0.2,
 });
 
-async function search(q: string) {
+export const search = async (q: string) => {
     const filtered = fuse.search(q, { limit: 25 }).map((x) => x.item);
     if (filtered.length > 0) return filtered;
 
