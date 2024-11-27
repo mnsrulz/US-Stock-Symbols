@@ -9,11 +9,12 @@ import { search } from './lib/data.ts';
 
 const router = new Router();
 
-router.get("/symbols", (context) => {
+router.get("/symbols", async (context) => {
     //api/symbols/search?q=t
     const { q } = getQuery(context);
+    const items = await search(q);
     context.response.body = {
-        items: search(q)
+        items
     };
 })
 
