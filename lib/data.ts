@@ -20,12 +20,9 @@ const fuse = new Fuse(allSymbols, {
 });
 
 export const search = async (q: string) => {
-    const filtered = fuse.search(q, { limit: 25 }).map((x) => x.item);
-    if (filtered.length > 0) return filtered;
 
     try {
         const resp = await yf.search(q);
-
         const yahooSymbols = resp.quotes.map(j => j as unknown as any).filter(j => j.isYahooFinance)
             .filter(j => allowedYfTypes.includes(j.quoteType))
             .map(j => {
@@ -40,5 +37,8 @@ export const search = async (q: string) => {
     } catch (error) {
 
     }
+    const filtered = fuse.search(q, { limit: 25 }).map((x) => x.item);
+    if (filtered.length > 0) return filtered;
+
     return [];
 }
