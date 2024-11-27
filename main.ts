@@ -4,15 +4,14 @@ import {
     Router,
 } from "https://deno.land/x/oak@v12.6.1/mod.ts";
 import { getQuery } from "https://deno.land/x/oak@v12.6.1/helpers.ts";
-import {search} from './lib/data';
+import {search} from './lib/data.ts';
 const router = new Router();
 
-router.get("/", (context) => {
+router.get("/symbols", (context) => {
     //api/symbols/search?q=t
     const { q } = getQuery(context);
     context.response.body = {
         items: search(q)
-
     };
 })
 

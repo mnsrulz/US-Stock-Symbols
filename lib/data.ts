@@ -1,6 +1,5 @@
 import Fuse from "https://esm.sh/fuse.js@7.0.0";
 
-
 import amex from "./../amex/amex_full_tickers.json" with {
     type: "json",
 };
@@ -18,7 +17,7 @@ const fuse = new Fuse(allSymbols, {
     threshold: 0.2,
 });
 
-export const search = (q: string)=>{
+export const search = (q: string) => {
     const filtered = fuse.search(q, { limit: 25 }).map((x) => x.item);
     return filtered;
 }
